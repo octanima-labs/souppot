@@ -22,6 +22,12 @@ dev = [
   "pytest",
   "ruff",
 ]
+docs = [
+  "myst-parser",
+  "pydata-sphinx-theme",
+  "sphinx",
+  "sphinx-autodoc-typehints",
+]
 
 [tool.ruff]
 target-version = "py311"
@@ -40,6 +46,17 @@ dependencies = [
   "pytest",
   "ruff",
 ]
+
+[tool.hatch.envs.docs]
+dependencies = [
+  "myst-parser",
+  "pydata-sphinx-theme",
+  "sphinx",
+  "sphinx-autodoc-typehints",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "sphinx-build -W -b html docs docs/_build/html"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/souppot"]

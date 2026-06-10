@@ -62,7 +62,11 @@ print(path)
 
 ## Documentation
 
-Full documentation is planned. For now, see the [source](src/souppot/core.py) and [tests](tests/).
+Documentation sources live in [docs/](docs/). Build them with:
+
+```bash
+hatch run docs:build
+```
 
 ## License
 
