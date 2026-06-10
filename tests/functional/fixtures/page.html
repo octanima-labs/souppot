@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Souppot Functional Fixture</title>
+  </head>
+  <body>
+    <main id="content">
+      <h1 id="title">Souppot Functional Fixture</h1>
+      <p class="static">This element is present in the original HTML.</p>
+    </main>
+    <script>
+      setTimeout(() => {
+        const node = document.createElement("p");
+        node.className = "delayed";
+        node.textContent = "This element was created by JavaScript.";
+        document.querySelector("#content").appendChild(node);
+      }, 200);
+    </script>
+  </body>
+</html>

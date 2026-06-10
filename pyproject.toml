@@ -1,0 +1,47 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "souppot"
+version = "0.1.0"
+description = "Small helpers for fetching and parsing HTML with requests or Playwright."
+requires-python = ">=3.11"
+dependencies = [
+  "beautifulsoup4",
+  "requests",
+  "playwright",
+  "2ning",
+]
+
+[dependency-groups]
+dev = [
+  "build",
+  "mypy",
+  "pytest",
+  "ruff",
+]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+
+[tool.hatch.envs.default]
+dependencies = [
+  "build",
+  "mypy",
+  "pytest",
+  "ruff",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/souppot"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+  "functional: local HTTP server tests that exercise real requests and Playwright paths",
+]
