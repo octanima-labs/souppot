@@ -7,7 +7,6 @@
 
 ## Script API
 - The exported API is defined by `__all__`: `cold_soup`, `hot_soup`, and `hot_download`.
-- `instant_soup` is a stub and is not exported.
 - `cold_soup` uses `requests` with browser-like headers, returns `BeautifulSoup` for `text/html`, returns the raw `requests.Response` for other 200 responses, and returns `None` for missing URLs or non-200 responses unless `check_errors=True` raises first.
 - `hot_soup` and `hot_download` require Playwright Chromium; `hot_soup` returns `None` on Playwright errors and continues parsing if `wait_selector` times out.
 - `hot_download` creates destination parent directories and writes the response body to `dest` using Playwright's request context.
@@ -18,6 +17,7 @@
 - Use Hatch for the dev environment; `hatch run pytest` installs/syncs dev tools and runs the configured test suite.
 - Run only unit tests with `hatch run pytest tests/test_core.py`.
 - Run functional tests with `hatch run pytest tests/functional`; Playwright-backed tests skip if Chromium is unavailable.
+- Run type checks with `hatch run mypy src/souppot`; `pyproject.toml` ignores missing imports for `tuning` because `2ning` does not ship type stubs.
 - The smallest syntax sanity check is `python -m py_compile src/souppot/__init__.py src/souppot/core.py tests/test_core.py tests/functional/test_functional.py`.
 
 ## Testing Notes

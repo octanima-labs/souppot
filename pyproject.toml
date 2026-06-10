@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "souppot"
 version = "0.1.0"
 description = "Small helpers for fetching and parsing HTML with requests or Playwright."
+license = "MIT"
 requires-python = ">=3.11"
 dependencies = [
   "beautifulsoup4",
@@ -27,6 +28,10 @@ target-version = "py311"
 
 [tool.mypy]
 python_version = "3.11"
+
+[[tool.mypy.overrides]]
+module = ["tuning"]
+ignore_missing_imports = true
 
 [tool.hatch.envs.default]
 dependencies = [

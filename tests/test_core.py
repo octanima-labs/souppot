@@ -161,7 +161,7 @@ def fixture_html() -> str:
 
 
 def test_package_exports_public_api() -> None:
-    assert souppot.__all__ == ["cold_soup", "hot_soup", "hot_download"]
+    assert souppot.__all__ == ("cold_soup", "hot_soup", "hot_download")
     assert souppot.cold_soup is core.cold_soup
     assert souppot.hot_soup is core.hot_soup
     assert souppot.hot_download is core.hot_download
@@ -192,7 +192,7 @@ def test_cold_soup_sends_browser_like_request_headers(monkeypatch: pytest.Monkey
     headers = call["headers"]
 
     assert call["url"] == "https://example.com/path"
-    assert call["stream"] is True
+    assert "stream" not in call
     assert call["timeout"] == 15
     assert call["allow_redirects"] is True
     assert isinstance(headers, dict)
