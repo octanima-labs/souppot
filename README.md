@@ -62,11 +62,7 @@ print(path)
 
 ## Documentation
 
-Documentation sources live in [docs/](docs/). Build them with:
-
-```bash
-hatch run docs:build
-```
+The extended API documentation can be found [here](https://octanima-labs.github.io/souppot/).
 
 ## License
 
