@@ -98,7 +98,11 @@ def cold_soup(
         return None
     logger.debug("GET %s", url)
     parsed = urlparse(url)
-    origin = f"{parsed.scheme}://{parsed.netloc}" if parsed.scheme and parsed.netloc else None
+    origin = (
+        f"{parsed.scheme}://{parsed.netloc}"
+        if parsed.scheme and parsed.netloc
+        else None
+    )
     headers = HTML_HEADERS.copy()
     if origin:
         headers["Referer"] = origin + "/"

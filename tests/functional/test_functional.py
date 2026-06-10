@@ -50,8 +50,13 @@ def test_cold_soup_fetches_local_html(fixture_server: str) -> None:
     soup = cold_soup(f"{fixture_server}/page.html")
 
     assert isinstance(soup, BeautifulSoup)
-    assert soup.select_one("#title").get_text(strip=True) == "Souppot Functional Fixture"
-    assert soup.select_one(".static").get_text(strip=True) == "This element is present in the original HTML."
+    assert (
+        soup.select_one("#title").get_text(strip=True) == "Souppot Functional Fixture"
+    )
+    assert (
+        soup.select_one(".static").get_text(strip=True)
+        == "This element is present in the original HTML."
+    )
     assert soup.select_one(".delayed") is None
 
 
@@ -59,10 +64,15 @@ def test_hot_soup_waits_for_javascript_created_element(
     fixture_server: str,
     chromium_available: None,
 ) -> None:
-    soup = hot_soup(f"{fixture_server}/page.html", wait_selector=".delayed", wait_seconds=2)
+    soup = hot_soup(
+        f"{fixture_server}/page.html", wait_selector=".delayed", wait_seconds=2
+    )
 
     assert isinstance(soup, BeautifulSoup)
-    assert soup.select_one(".delayed").get_text(strip=True) == "This element was created by JavaScript."
+    assert (
+        soup.select_one(".delayed").get_text(strip=True)
+        == "This element was created by JavaScript."
+    )
 
 
 def test_hot_download_downloads_local_file(
@@ -73,7 +83,9 @@ def test_hot_download_downloads_local_file(
     source = FIXTURES / "dummy.bin"
     dest = tmp_path / "downloads" / "dummy.bin"
 
-    result = hot_download(f"{fixture_server}/dummy.bin", dest, referer=f"{fixture_server}/page.html")
+    result = hot_download(
+        f"{fixture_server}/dummy.bin", dest, referer=f"{fixture_server}/page.html"
+    )
 
     assert result == dest
     assert dest.read_bytes() == source.read_bytes()

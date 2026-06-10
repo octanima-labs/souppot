@@ -168,7 +168,9 @@ def test_package_exports_public_api() -> None:
 
 
 @pytest.mark.parametrize("url", [None, "", "   "])
-def test_cold_soup_missing_url_returns_none_without_request(monkeypatch: pytest.MonkeyPatch, url: str | None) -> None:
+def test_cold_soup_missing_url_returns_none_without_request(
+    monkeypatch: pytest.MonkeyPatch, url: str | None
+) -> None:
     def fail_get(**kwargs: object) -> None:
         raise AssertionError("requests.get should not be called")
 
@@ -177,7 +179,9 @@ def test_cold_soup_missing_url_returns_none_without_request(monkeypatch: pytest.
     assert core.cold_soup(url) is None
 
 
-def test_cold_soup_sends_browser_like_request_headers(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_cold_soup_sends_browser_like_request_headers(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     response = FakeResponse(headers={"Content-Type": "application/json"})
     calls: list[dict[str, object]] = []
 
@@ -204,7 +208,9 @@ def test_cold_soup_returns_beautifulsoup_for_html_response(
     monkeypatch: pytest.MonkeyPatch,
     fixture_html: str,
 ) -> None:
-    response = FakeResponse(text=fixture_html, headers={"Content-Type": "text/html; charset=utf-8"})
+    response = FakeResponse(
+        text=fixture_html, headers={"Content-Type": "text/html; charset=utf-8"}
+    )
 
     monkeypatch.setattr(core.requests, "get", lambda **kwargs: response)
 
@@ -214,15 +220,21 @@ def test_cold_soup_returns_beautifulsoup_for_html_response(
     assert soup.select_one("#title").get_text(strip=True) == "Soup Pot"
 
 
-def test_cold_soup_returns_response_for_non_html_response(monkeypatch: pytest.MonkeyPatch) -> None:
-    response = FakeResponse(text='{"ok": true}', headers={"Content-Type": "application/json"})
+def test_cold_soup_returns_response_for_non_html_response(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    response = FakeResponse(
+        text='{"ok": true}', headers={"Content-Type": "application/json"}
+    )
 
     monkeypatch.setattr(core.requests, "get", lambda **kwargs: response)
 
     assert core.cold_soup("https://example.com/data.json") is response
 
 
-def test_cold_soup_returns_none_for_non_200_response(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_cold_soup_returns_none_for_non_200_response(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     response = FakeResponse(status_code=404, headers={"Content-Type": "text/html"})
 
     monkeypatch.setattr(core.requests, "get", lambda **kwargs: response)
@@ -230,7 +242,9 @@ def test_cold_soup_returns_none_for_non_200_response(monkeypatch: pytest.MonkeyP
     assert core.cold_soup("https://example.com/missing") is None
 
 
-def test_cold_soup_check_errors_raises_before_status_handling(monkeypatch: pytest.MonkeyPatch) -> None:
+def test_cold_soup_check_errors_raises_before_status_handling(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     class MarkerError(Exception):
         pass
 
@@ -243,7 +257,9 @@ def test_cold_soup_check_errors_raises_before_status_handling(monkeypatch: pytes
 
 
 @pytest.mark.parametrize("url", [None, "", "   "])
-def test_hot_soup_missing_url_returns_none_without_playwright(monkeypatch: pytest.MonkeyPatch, url: str | None) -> None:
+def test_hot_soup_missing_url_returns_none_without_playwright(
+    monkeypatch: pytest.MonkeyPatch, url: str | None
+) -> None:
     def fail_sync_playwright() -> None:
         raise AssertionError("sync_playwright should not be called")
 
@@ -268,7 +284,10 @@ def test_hot_soup_parses_rendered_html_from_fake_playwright(
     soup = core.hot_soup("https://example.com/page", wait_seconds=0)
 
     assert isinstance(soup, BeautifulSoup)
-    assert soup.select_one(".message").get_text(strip=True) == "Fixture HTML for parser unit tests."
+    assert (
+        soup.select_one(".message").get_text(strip=True)
+        == "Fixture HTML for parser unit tests."
+    )
     assert sleep_calls == [0]
     assert context.closed is True
     assert browser.closed is True
@@ -285,7 +304,9 @@ def test_hot_soup_wait_selector_timeout_still_parses_html(
 
     monkeypatch.setattr(core, "sync_playwright", lambda: playwright)
 
-    soup = core.hot_soup("https://example.com/page", wait_selector="#missing", wait_seconds=0.2)
+    soup = core.hot_soup(
+        "https://example.com/page", wait_selector="#missing", wait_seconds=0.2
+    )
 
     assert isinstance(soup, BeautifulSoup)
     assert soup.select_one("#content") is not None
@@ -293,12 +314,16 @@ def test_hot_soup_wait_selector_timeout_still_parses_html(
 
 
 @pytest.mark.parametrize("url", [None, "", "   "])
-def test_hot_download_missing_url_raises_value_error(url: str | None, tmp_path: Path) -> None:
+def test_hot_download_missing_url_raises_value_error(
+    url: str | None, tmp_path: Path
+) -> None:
     with pytest.raises(ValueError, match="URL not provided"):
         core.hot_download(url, tmp_path / "out.bin")
 
 
-def test_hot_download_creates_parent_dirs_and_writes_body(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
+def test_hot_download_creates_parent_dirs_and_writes_body(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path
+) -> None:
     body = b"downloaded bytes"
     context = FakeDownloadContext(body)
     browser = FakeDownloadBrowser(context)
