@@ -2,7 +2,7 @@
 
 Small helpers for fetching and parsing HTML with `requests` or Playwright.
 
-Use `cold_soup` for normal server-rendered HTML, `hot_soup` for JavaScript-rendered pages, and `hot_download` when a download needs Playwright's browser-like request stack.
+Use `cold_soup` for normal server-rendered HTML, `hot_soup` for JavaScript-rendered pages, and `hot_pot` when a download needs Playwright's browser-like request stack.
 
 ```{toctree}
 :maxdepth: 2

@@ -7,7 +7,7 @@ import pytest
 from bs4 import BeautifulSoup
 from playwright.sync_api import Error as PlaywrightError
 from playwright.sync_api import sync_playwright
-from souppot import cold_soup, hot_download, hot_soup
+from souppot import cold_soup, hot_pot, hot_soup
 
 
 pytestmark = pytest.mark.functional
@@ -75,7 +75,7 @@ def test_hot_soup_waits_for_javascript_created_element(
     )
 
 
-def test_hot_download_downloads_local_file(
+def test_hot_pot_downloads_local_file(
     fixture_server: str,
     chromium_available: None,
     tmp_path: Path,
@@ -83,7 +83,7 @@ def test_hot_download_downloads_local_file(
     source = FIXTURES / "dummy.bin"
     dest = tmp_path / "downloads" / "dummy.bin"
 
-    result = hot_download(
+    result = hot_pot(
         f"{fixture_server}/dummy.bin", dest, referer=f"{fixture_server}/page.html"
     )
 

@@ -161,10 +161,10 @@ def fixture_html() -> str:
 
 
 def test_package_exports_public_api() -> None:
-    assert souppot.__all__ == ("cold_soup", "hot_soup", "hot_download")
+    assert souppot.__all__ == ("cold_soup", "hot_soup", "hot_pot")
     assert souppot.cold_soup is core.cold_soup
     assert souppot.hot_soup is core.hot_soup
-    assert souppot.hot_download is core.hot_download
+    assert souppot.hot_pot is core.hot_pot
 
 
 @pytest.mark.parametrize("url", [None, "", "   "])
@@ -314,14 +314,14 @@ def test_hot_soup_wait_selector_timeout_still_parses_html(
 
 
 @pytest.mark.parametrize("url", [None, "", "   "])
-def test_hot_download_missing_url_raises_value_error(
+def test_hot_pot_missing_url_raises_value_error(
     url: str | None, tmp_path: Path
 ) -> None:
     with pytest.raises(ValueError, match="URL not provided"):
-        core.hot_download(url, tmp_path / "out.bin")
+        core.hot_pot(url, tmp_path / "out.bin")
 
 
-def test_hot_download_creates_parent_dirs_and_writes_body(
+def test_hot_pot_creates_parent_dirs_and_writes_body(
     monkeypatch: pytest.MonkeyPatch, tmp_path: Path
 ) -> None:
     body = b"downloaded bytes"
@@ -332,7 +332,7 @@ def test_hot_download_creates_parent_dirs_and_writes_body(
 
     monkeypatch.setattr(core, "sync_playwright", lambda: playwright)
 
-    result = core.hot_download(
+    result = core.hot_pot(
         " https://example.com/file.bin ",
         dest,
         referer="https://example.com/page",

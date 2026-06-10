@@ -49,9 +49,9 @@ if soup:
 Download a file with Playwright:
 
 ```python
-from souppot import hot_download
+from souppot import hot_pot
 
-path = hot_download(
+path = hot_pot(
     "https://example.com/file.zip",
     "downloads/file.zip",
     referer="https://example.com",

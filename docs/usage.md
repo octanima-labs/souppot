@@ -32,12 +32,12 @@ If `wait_selector` times out, `hot_soup` logs the timeout and parses whatever DO
 
 ## Downloads
 
-Use `hot_download` when a file should be downloaded through Playwright's request context.
+Use `hot_pot` when a file should be downloaded through Playwright's request context.
 
 ```python
-from souppot import hot_download
+from souppot import hot_pot
 
-path = hot_download(
+path = hot_pot(
     "https://example.com/file.zip",
     "downloads/file.zip",
     referer="https://example.com",

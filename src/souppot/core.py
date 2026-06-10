@@ -1,7 +1,7 @@
 """Core helpers for fetching static pages, rendered pages, and downloads.
 
 ``cold_soup`` uses ``requests`` for normal HTTP responses. ``hot_soup`` and
-``hot_download`` use Playwright Chromium for JavaScript-rendered pages and
+``hot_pot`` use Playwright Chromium for JavaScript-rendered pages and
 browser-like download requests.
 """
 
@@ -61,7 +61,7 @@ DOWNLOAD_HEADERS: Final[dict[str, str]] = {
     "Pragma": "no-cache",
 }
 
-__all__: Final[tuple[str, ...]] = ("cold_soup", "hot_soup", "hot_download")
+__all__: Final[tuple[str, ...]] = ("cold_soup", "hot_soup", "hot_pot")
 
 
 def _clean_url(url: str | None) -> str | None:
@@ -200,7 +200,7 @@ def hot_soup(
         return None
 
 
-def hot_download(
+def hot_pot(
     url: str | None,
     dest: str | Path,
     referer: str | None = None,

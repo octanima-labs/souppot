@@ -1,5 +1,5 @@
 """Public package interface for souppot HTML fetching helpers."""
 
-from .core import cold_soup, hot_download, hot_soup
+from .core import cold_soup, hot_pot, hot_soup
 
-__all__ = ("cold_soup", "hot_soup", "hot_download")
+__all__ = ("cold_soup", "hot_soup", "hot_pot")
