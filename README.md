@@ -64,6 +64,10 @@ print(path)
 
 The extended API documentation can be found [here](https://octanima-labs.github.io/souppot/).
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
