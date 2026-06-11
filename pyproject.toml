@@ -7,13 +7,33 @@ name = "souppot"
 version = "0.1.0"
 description = "Small helpers for fetching and parsing HTML with requests or Playwright."
 license = "MIT"
+authors = [
+  { name = "octanima-labs", email = "octanima@tuta.io" },
+]
 requires-python = ">=3.11"
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = [
   "beautifulsoup4",
   "requests",
   "playwright",
   "2ning",
 ]
+
+[project.urls]
+Repository = "https://github.com/octanima-labs/souppot"
+Documentation = "https://octanima-labs.github.io/souppot/"
+Issues = "https://github.com/octanima-labs/souppot/issues"
 
 [dependency-groups]
 dev = [
