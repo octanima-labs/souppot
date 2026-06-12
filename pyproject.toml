@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "souppot"
 version = "0.1.0"
 description = "Small helpers for fetching and parsing HTML with requests or Playwright."
+readme = "README.md"
 license = "MIT"
 authors = [
   { name = "octanima-labs", email = "octanima@tuta.io" },
